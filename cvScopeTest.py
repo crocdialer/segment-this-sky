@@ -28,7 +28,7 @@ class App(object):
         
         self.cannyLow = 71
         self.cannyHigh = 208
-        self.morphKernSize = (11,11)
+        self.morphKernSize = (9,9)
         self.threshVal = 140
         self.minPathLength = 400
 
@@ -102,12 +102,11 @@ class App(object):
             
             workImg = edges.copy()
 
-            cv2.morphologyEx(   edges,
-                                cv2.MORPH_CLOSE,
+            cv2.dilate(         edges,
                                 cv2.getStructuringElement(cv2.MORPH_ELLIPSE,self.morphKernSize),
                                 workImg,
                                 (-1,-1),
-                                5)
+                                2)
             cv2.morphologyEx(   thresh,
                                 cv2.MORPH_CLOSE,
                                 cv2.getStructuringElement(cv2.MORPH_ELLIPSE,self.morphKernSize),
